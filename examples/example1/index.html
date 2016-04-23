@@ -47,19 +47,34 @@
 			style: {
 				barFilledColor: '#f32102',
 				barEmptyColor: '#333',
-				containerColor: 'white'
-			}
-		}).animate(50);// the default is 100 ms
+				containerColor: 'white',
+				percentageColor: 'black'
+			},
+			showPercentage: true
+		}).animate(500);// the default is 100 ms
 		
 		// Long way
 		var widgetDiv = document.getElementById('loading-bar1');
 		var options = {
 			div: widgetDiv,
-			maxBars: 12
+			maxBars: 12,
+			showPercentage: true
 		};
 		var loadingBar = new LoadingBar(options);
 		loadingBar.animate(); // the default is 100 ms
 
+		// var loadingBar2 = new LoadingBar({
+		// 	div: $('#loading-bar2'),
+		// 	maxBars: 14,
+		// 	style: {
+		// 		barFilledColor: '#f32102',
+		// 		barEmptyColor: '#333',
+		// 		containerColor: 'white',
+		// 		percentageColor: 'black'
+		// 	},
+		// 	showPercentage: true
+		// }).advanceByPercentage(0.5);// the default is 100 ms
+		// loadingBar2.advanceBy(1);
 	</script>
 
 </body>

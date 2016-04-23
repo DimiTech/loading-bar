@@ -1,3 +1,7 @@
-# Ignore the todo.txt file #
+# Ignore the following files #
 
 todo.txt
+
+# Ignore all linter settings #
+
+*.jshintrc

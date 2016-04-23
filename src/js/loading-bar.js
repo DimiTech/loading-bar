@@ -133,7 +133,15 @@
 	// Advance the loading by a given percentage
 	LoadingBar.prototype.advanceByPercentage = function(percent) {
 		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
-			this.barsLoaded += ~~(this.maxBars * percent); // Using the bitwise NOT operator to convert to int
+
+			// Update the percentage display and property
+			if (this.percentageDisplay !== undefined)
+				this.updatePercentage(this.barsLoaded, percent);
+			else
+				this.addPercentage(percent);
+
+
+			this.barsLoaded = ~~((this.percentage / 100) * this.maxBars); // Using the bitwise NOT operator to convert to int
 
 			if (this.barsLoaded >= this.maxBars)
 				this.barsLoaded = this.maxBars;
@@ -146,10 +154,6 @@
 
 			// Fill affected bars
 			this.fillBars();
-
-			// Update the percentage display
-			if (this.percentageDisplay !== undefined)
-				this.updatePercentage(this.barsLoaded);
 		}
 		return this;
 	};
@@ -174,6 +178,8 @@
 			// Update the percentage display
 			if (this.percentageDisplay !== undefined)
 				this.updatePercentage(this.barsLoaded);
+			else
+				this.percentage = ~~((this.barsLoaded / this.maxBars) * 100);
 		}
 		return this;
 	};
@@ -197,6 +203,10 @@
 			// Update the percentage display
 			if (this.percentageDisplay !== undefined)
 				this.updatePercentage(this.barsLoaded);
+			else {
+				this.percentage = 0;
+				this.addPercentage(percent);
+			}
 		}
 		return this;
 	};
@@ -208,13 +218,28 @@
 	};
 	
 	// Update the percentage text
-	LoadingBar.prototype.updatePercentage = function(barsLoaded) {
+	LoadingBar.prototype.updatePercentage = function(barsLoaded, percent) {
+		console.log();
 		if (barsLoaded > this.maxBars)
 			this.percentage = 0;
-		else
-			// Using the bitwise NOT operator to convert to int
-			this.percentage = ~~((barsLoaded / this.maxBars) * 100);
+		else {
+			if (percent === undefined)
+				this.percentage = ~~((barsLoaded / this.maxBars) * 100); // Using the bitwise NOT operator to convert to int
+			else {
+				this.addPercentage(percent);
+			}
+										 
+		}
+		
 		this.percentageDisplay.innerHTML = this.percentage + '%';
+	};
+
+	LoadingBar.prototype.addPercentage = function(percent) {
+		this.percentage += percent * 100;
+			if (this.percentage < 0)
+				this.percentage = 0;
+			if (this.percentage > 100)
+				this.percentage = 100;
 	};
 
 	// Resets the entire loader

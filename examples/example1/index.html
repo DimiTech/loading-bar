@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Dušan Dimitrić">
+
+	<title>Loading Bar - Example 1</title>
+
+	<!-- jQuery (optional) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+	<!-- Loading bar -->
+	<link rel="stylesheet" href="css/loading-bar.css" type="text/css">
+	<script src="js/loading-bar.js" type="text/javascript"></script>
+
+	<style>
+		body {
+			background-color: black;
+			color: white;
+			text-align: center;
+			font-family: helvetica;
+		}
+		#loading-bar-verbose, #loading-bar-oneline {
+			margin-bottom: 50px;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Loading bar examples: </h1>
+
+	<p>Loading the widget in one line:</p>
+	<div id="loading-bar1"></div>
+	
+	<p>Loading the widget the 'long' way:</p>
+	<div id="loading-bar2"></div>
+
+	<script type="text/javascript">
+		
+		// Short way
+		var loadingBar2 = new LoadingBar({
+			div: $('#loading-bar2'),
+			maxBars: 15,
+			style: {
+				barFilledColor: '#f32102',
+				barEmptyColor: '#333',
+				containerColor: 'white'
+			}
+		}).animate(50);// the default is 100 ms
+		
+		// Long way
+		var widgetDiv = document.getElementById('loading-bar1');
+		var options = {
+			div: widgetDiv,
+			maxBars: 12
+		};
+		var loadingBar = new LoadingBar(options);
+		loadingBar.animate(); // the default is 100 ms
+
+	</script>
+
+</body>

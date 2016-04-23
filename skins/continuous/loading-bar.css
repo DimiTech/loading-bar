@@ -23,11 +23,6 @@
 
 .loading-bar .percentage-container {
 	display: block;
-	-webkit-transform: skewX(0deg);
-    -moz-transform: skewX(0deg);
-    -ms-transform: skewX(0deg);
-    -o-transform: skewX(0deg);
-    transform: skewX(0deg);
 }
 
 .loading-bar .percentage-container #percentage {

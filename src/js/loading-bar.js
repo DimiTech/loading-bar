@@ -91,21 +91,21 @@
 		var displayPercentage = (this.percentageDisplay !== undefined);
 		var barFilledColor = this.widget.barFilledColor;
 		var animationInterval = setInterval(function() {
-			if (barsLoaded >= maxBars) {
-				barsLoaded = 0;
+			if (self.barsLoaded >= maxBars) {
+				self.barsLoaded = 0;
 				self.resetBars();
 				this.percentage = 0;
-				self.updatePercentage(barsLoaded);
+				if (displayPercentage)
+					self.updatePercentage(self.barsLoaded);
 				return;
 			}
-			self.loadingBars[barsLoaded].style.backgroundColor = barFilledColor;
+			self.loadingBars[self.barsLoaded].style.backgroundColor = barFilledColor;
 
-			barsLoaded++;
+			self.barsLoaded++;
 
 			if (displayPercentage)
-				self.updatePercentage(barsLoaded);
+				self.updatePercentage(self.barsLoaded);
 
-			console.log('animate');
 		}, speed || 100);
 		this.animationInterval = animationInterval;
 		return this;
@@ -113,16 +113,21 @@
 
 	LoadingBar.prototype.stopAnimation = function() {
 		clearInterval(this.animationInterval);
-		this.resetLoader();
 	};
 
 	// Advance the loading by a given percentage
 	LoadingBar.prototype.advanceByPercentage = function(percent) {
-		if (this.barsLoaded <= this.maxBars) {
+		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
 			this.barsLoaded += ~~(this.maxBars * percent); // Using the bitwise NOT operator to convert to int
 
 			if (this.barsLoaded >= this.maxBars)
 				this.barsLoaded = this.maxBars;
+
+			if (this.barsLoaded < 0)
+				this.barsLoaded = 0;
+
+			if (percent < 0)
+				this.resetBars();
 
 			// Fill affected bars
 			this.fillBars();
@@ -136,11 +141,40 @@
 
 	// Advance the loading by a given number of bars
 	LoadingBar.prototype.advanceBy = function(noBars) {
-		if (this.barsLoaded <= this.maxBars) {
+		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
 			this.barsLoaded += noBars;
 
 			if (this.barsLoaded >= this.maxBars)
 				this.barsLoaded = this.maxBars;
+
+			if (this.barsLoaded < 0)
+				this.barsLoaded = 0;
+
+			if (noBars < 0)
+				this.resetBars();
+
+			// Fill affected bars
+			this.fillBars();
+
+			// Update the percentage display
+			if (this.percentageDisplay !== undefined)
+				this.updatePercentage(this.barsLoaded);
+		}
+		return this;
+	};
+
+	// Sets the loading bar to the given percentage
+	LoadingBar.prototype.setValue = function(percent) {
+		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
+			this.barsLoaded = ~~(this.maxBars * percent); // Using the bitwise NOT operator to convert to int
+
+			if (this.barsLoaded >= this.maxBars)
+				this.barsLoaded = this.maxBars;
+
+			if (this.barsLoaded < 0)
+				this.barsLoaded = 0;
+
+			this.resetBars();
 
 			// Fill affected bars
 			this.fillBars();
@@ -172,7 +206,8 @@
 	LoadingBar.prototype.resetLoader = function() {
 		this.barsLoaded = 0;
 		this.percentage = 0;
-		this.updatePercentage(0);
+		if (this.percentageDisplay !== undefined)
+			this.updatePercentage(0);
 		this.resetBars();
 	};
 

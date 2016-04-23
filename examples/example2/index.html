@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Dušan Dimitrić">
+
+	<title>Loading Bar - Example 2</title>
+
+	<!-- jQuery (optional) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+	<!-- Loading bar -->
+	<link rel="stylesheet" href="../../src/css/loading-bar.css" type="text/css">
+	<script src="../../src/js/loading-bar.js" type="text/javascript"></script>
+
+	<style>
+		body {
+			background-color: black;
+			color: white;
+			text-align: center;
+			font-family: helvetica;
+		}
+		#loading-bar-verbose, #loading-bar-oneline {
+			margin-bottom: 50px;
+		}
+		.button {
+			display: inline-block;
+			cursor: pointer; margin-top: 10px;
+			background-color: white;
+			padding: 5px; color: black;
+		}
+		input {
+			padding: 5px;
+			width: 3em;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Loading bar example: </h1>
+
+	<p>Advancing the loading bar by percentage or number of bars:</p>
+	<div id="loading-bar1"></div>
+
+	<span>Advance by </span>
+		<input id="advance-input" value="1"> 
+	<span> bars</span>
+	<a class="button" onclick="advance()">Go</a>
+	<br>
+	<span>Advance by </span>
+		<input id="advance-perc-input" value="-10"> 
+	<span> percent</span>
+	<a class="button" onclick="advancePerc()">Go</a>
+	<br>
+	<span>Set value to </span>
+		<input id="set-value-input" value="50"> 
+	<span> percent</span>
+	<a class="button" onclick="setValue()">Go</a>
+
+	<script type="text/javascript">
+
+		// Create a loading bar
+		var loadingBar = new LoadingBar({
+			div: $('#loading-bar1'),
+			maxBars: 14,
+			style: {
+				barFilledColor: '#f32102',
+				barEmptyColor: '#333',
+				containerColor: 'white',
+				percentageColor: 'black'
+			},
+			showPercentage: true
+		}).advanceByPercentage(0.5);// the default is 100 ms
+		loadingBar.advanceBy(1);
+
+		// Triggered when the 'Go' button is clicked
+		function advance() {
+			var bars = parseInt(document.getElementById('advance-input').value);
+			loadingBar.advanceBy(bars);
+		}
+		function advancePerc() {
+			var perc = parseInt(document.getElementById('advance-perc-input').value) * 0.01;
+			loadingBar.advanceByPercentage(perc);
+		}
+		function setValue() {
+			var perc = parseInt(document.getElementById('set-value-input').value) * 0.01;
+			loadingBar.setValue(perc);
+		}
+
+	</script>
+
+</body>

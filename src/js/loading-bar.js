@@ -17,11 +17,44 @@
 		this.loadingBars = {};
 		this.barsLoaded = 0;
 		this.loadIntoDiv(options.div);
-		if (options.showPercentage === true)
+		if (options.showPercentage === true) {
 			this.percentageDisplay = document.getElementById('percentage');
+			this.centerPercentageLabel();
+		}
 		this.initializeStyle(options.style);
+		
 		return this;
 	}
+
+	// Loads the widget into the element
+	LoadingBar.prototype.loadIntoDiv = function(div) {
+		if (div !== null) {
+			if (div[0] !== undefined) { 	      // This means that the div is coming from jQuery
+				
+				if (div[0].localName === 'div') {
+					div[0].innerHTML = this.loadingBarHTML;
+					this.parentDiv = div[0];
+				}
+
+			} else if (div.localName === 'div') { // This means that the div is coming from document.getElementById
+				div.innerHTML = this.loadingBarHTML;
+				this.parentDiv = div;
+			}   
+			else
+				throw 'LoadingBar failed to load! Invalid div element.';
+		} else
+			throw 'LoadingBar failed to load! Invalid div element.';
+		this.widget = document.getElementsByClassName('loading-bar')[0];
+		this.loadingBars = this.widget.getElementsByClassName('bar');
+		this.widget.style.visibility = 'hidden';
+	};
+
+
+	// Centers the percentage label
+	LoadingBar.prototype.centerPercentageLabel = function() {
+		var topMargin = (this.parentDiv.clientHeight - this.percentageDisplay.clientHeight) / 2  - 10;
+		this.percentageDisplay.style.marginTop = topMargin + 'px';
+	};
 
 	// Styles the widget
 	LoadingBar.prototype.initializeStyle = function(style) {
@@ -53,25 +86,6 @@
 		if (this.percentageDisplay !== undefined)
 			this.percentageDisplay.style.color = this.widget.percentageColor;
 		this.resetBars();
-	};
-
-	// Loads the widget into the element
-	LoadingBar.prototype.loadIntoDiv = function(div) {
-		if (div !== null) {
-			if (div[0] !== undefined) { 	      // This means that the div is coming from jQuery
-				
-				if (div[0].localName === 'div')
-					div[0].innerHTML = this.loadingBarHTML;
-
-			} else if (div.localName === 'div')   // This means that the div is coming from document.getElementById
-				div.innerHTML = this.loadingBarHTML;
-			else
-				throw 'LoadingBar failed to load! Invalid div element.';
-		} else
-			throw 'LoadingBar failed to load! Invalid div element.';
-		this.widget = document.getElementsByClassName('loading-bar')[0];
-		this.loadingBars = this.widget.getElementsByClassName('bar');
-		this.widget.style.visibility = 'hidden';
 	};
 
 	// Shows or hides the widget

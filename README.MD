@@ -6,3 +6,5 @@ There are working examples included so you can figure out how to use the widget 
 Here's also a gif that shows how it works:
 
 ![Gif](https://github.com/Dusan-Dimitric/loading-bar.js/blob/master/examples/examples.gif)
+
+(Works with jQuery or without!)

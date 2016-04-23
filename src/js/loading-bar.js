@@ -85,6 +85,7 @@
 
 	// Just a plain animation
 	LoadingBar.prototype.animate = function(speed) {
+		this.stopAnimation();
 		var barsLoaded = this.barsLoaded;
 		var maxBars = this.maxBars;
 		var self = this;

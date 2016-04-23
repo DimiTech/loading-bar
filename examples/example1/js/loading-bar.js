@@ -71,7 +71,7 @@
 			throw 'LoadingBar failed to load! Invalid div element.';
 		this.widget = document.getElementsByClassName('loading-bar')[0];
 		this.loadingBars = this.widget.getElementsByClassName('bar');
-		this.hide();
+		this.widget.style.visibility = 'hidden';
 	};
 
 	// Shows or hides the widget
@@ -79,6 +79,7 @@
 		this.widget.style.visibility = 'visible';
 	};
 	LoadingBar.prototype.hide = function() {
+		this.stopAnimation();
 		this.widget.style.visibility = 'hidden';
 	};
 
@@ -89,7 +90,7 @@
 		var self = this;
 		var displayPercentage = (this.percentageDisplay !== undefined);
 		var barFilledColor = this.widget.barFilledColor;
-		setInterval(function() {
+		var animationInterval = setInterval(function() {
 			if (barsLoaded >= maxBars) {
 				barsLoaded = 0;
 				self.resetBars();
@@ -103,8 +104,16 @@
 
 			if (displayPercentage)
 				self.updatePercentage(barsLoaded);
-			
+
+			console.log('animate');
 		}, speed || 100);
+		this.animationInterval = animationInterval;
+		return this;
+	};
+
+	LoadingBar.prototype.stopAnimation = function() {
+		clearInterval(this.animationInterval);
+		this.resetLoader();
 	};
 
 	// Advance the loading by a given percentage
@@ -126,9 +135,9 @@
 	};
 
 	// Advance the loading by a given number of bars
-	LoadingBar.prototype.advanceBy = function(barsNumber) {
+	LoadingBar.prototype.advanceBy = function(noBars) {
 		if (this.barsLoaded <= this.maxBars) {
-			this.barsLoaded += barsNumber;
+			this.barsLoaded += noBars;
 
 			if (this.barsLoaded >= this.maxBars)
 				this.barsLoaded = this.maxBars;
@@ -157,6 +166,14 @@
 			// Using the bitwise NOT operator to convert to int
 			this.percentage = ~~((barsLoaded / this.maxBars) * 100);
 		this.percentageDisplay.innerHTML = this.percentage + '%';
+	};
+
+	// Resets the entire loader
+	LoadingBar.prototype.resetLoader = function() {
+		this.barsLoaded = 0;
+		this.percentage = 0;
+		this.updatePercentage(0);
+		this.resetBars();
 	};
 
 	// Sets the colors of all the bars to black

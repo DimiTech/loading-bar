@@ -11,4 +11,4 @@ Here's also a gif that shows how it works:
 
 Some more skins:
 
-![Gif](https://github.com/Dusan-Dimitric/loading-bar.js/skins/skins.png)
+![Gif](https://raw.githubusercontent.com/Dusan-Dimitric/loading-bar/master/skins/skins.png)

@@ -1,0 +1,45 @@
+/* ------------ Loading bar default style -------------  */
+body {
+	background: #d6d3ce;
+}
+.loading-bar {
+	display: inline-block;
+	height: 12px;
+	margin: 5px 0;
+	padding: 0 1px;
+	border-top: 1px solid #888;
+	border-left: 1px solid #888;
+	border-bottom: 1px solid #eee;
+	border-right: 1px solid #eee;
+}
+
+.loading-bar .bar {
+	display: inline-block;
+	height: 10px;
+	width: 6px;
+	margin: 0 1px;
+	position: relative;
+	top: -3px;
+	background-color: #050505;
+}
+
+.loading-bar .percentage-container {
+    display: inline-block;
+    width: 30px;
+	height: 10px;
+	-webkit-transform: skewX(0deg);
+    -moz-transform: skewX(0deg);
+    -ms-transform: skewX(0deg);
+    -o-transform: skewX(0deg);
+    transform: skewX(0deg);
+}
+
+.loading-bar .percentage-container #percentage {
+	position: absolute;
+	text-align: center;
+	font-weight: bold;
+	width: 3em;
+	left: 1px;
+    display: inline-block;
+    margin: 8px 3px;
+}

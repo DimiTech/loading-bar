@@ -8,3 +8,7 @@ Here's also a gif that shows how it works:
 ![Gif](https://github.com/Dusan-Dimitric/loading-bar.js/blob/master/examples/examples.gif)
 
 (Works with jQuery or without!)
+
+Some more skins:
+
+![Gif](https://github.com/Dusan-Dimitric/loading-bar.js/skins/skins.png)

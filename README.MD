@@ -3,6 +3,6 @@ There are working examples included so you can figure out how to use the widget 
 
 ![Screenshot](https://github.com/Dusan-Dimitric/loading-bar.js/blob/master/examples/example1/ss1.png)
 
-Here's also a gif that shows how it works (basically just repeats one animation for now ):
+Here's also a gif that shows how it works:
 
 ![Gif](https://github.com/Dusan-Dimitric/loading-bar.js/blob/master/examples/examples.gif)

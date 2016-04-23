@@ -62,15 +62,16 @@
 		// Create a loading bar
 		var loadingBar = new LoadingBar({
 			div: $('#loading-bar1'),
-			maxBars: 14,
+			maxBars: 20,
 			style: {
 				barFilledColor: '#f32102',
 				barEmptyColor: '#333',
 				containerColor: 'white',
+				barWidth: '10px',
 				percentageColor: 'black'
 			},
 			showPercentage: true
-		}).advanceByPercentage(0.5);// the default is 100 ms
+		}).advanceByPercentage(0.5);
 		loadingBar.advanceBy(1);
 
 		// Triggered when the 'Go' button is clicked

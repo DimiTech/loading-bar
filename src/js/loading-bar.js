@@ -67,13 +67,15 @@
 			this.widget.barEmptyColor  = style.barEmptyColor  || '#050505';
 			// set the percentage text color
 			this.widget.percentageColor = style.percentageColor || '#FFFFFF';
-
+			// width of one bar
+			this.widget.barWidth = style.barWidth;
 		} else { // the user didn't provide his own style
 			// default all colors
 			this.widget.barFilledColor  = '#FE8301';
 			this.widget.barEmptyColor   = '#050505';
 			this.widget.containerColor  = '#111111';
 			this.widget.percentageColor = '#FFFFFF';
+
 		}
 
 		this.applyStyles();
@@ -85,7 +87,14 @@
 		this.widget.style.backgroundColor = this.widget.containerColor;
 		if (this.percentageDisplay !== undefined)
 			this.percentageDisplay.style.color = this.widget.percentageColor;
+		if (this.widget.barWidth !== undefined)
+			this.setBarWidths();
 		this.resetBars();
+	};
+
+	LoadingBar.prototype.setBarWidths = function() {
+		for (let i = 0; i < this.maxBars; i++)
+			this.loadingBars[i].style.width = this.widget.barWidth;
 	};
 
 	// Shows or hides the widget

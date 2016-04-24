@@ -5,18 +5,18 @@
 	// The constructor
 	function LoadingBar(options) {
 		this.maxBars = options.maxBars || 12;
-		this.loadingBarHTML = '<div class="loading-bar">';
+		var loadingBarHTML = '<div class="loading-bar">';
 		for (let i = 0; i < this.maxBars; i++)
-			this.loadingBarHTML += '<div class="bar"></div>';
+			loadingBarHTML += '<div class="bar"></div>';
 		if (options.showPercentage === true)
-			this.loadingBarHTML += '<div class="percentage-container"><div id="percentage">0%</div></div>';
+			loadingBarHTML += '<div class="percentage-container"><div id="percentage">0%</div></div>';
 		this.percentage = 0;
-		this.loadingBarHTML += '</div>';
+		loadingBarHTML += '</div>';
 
 
 		this.loadingBars = {};
 		this.barsLoaded = 0;
-		this.loadIntoDiv(options.div);
+		this.loadIntoDiv(options.div, loadingBarHTML);
 		if (options.showPercentage === true) {
 			this.percentageDisplay = document.getElementById('percentage');
 			this.centerPercentageLabel();
@@ -27,26 +27,25 @@
 	}
 
 	// Loads the widget into the element
-	LoadingBar.prototype.loadIntoDiv = function(div) {
+	LoadingBar.prototype.loadIntoDiv = function(div, loadingBarHTML) {
 		if (div !== null) {
 			if (div[0] !== undefined) { 	      // This means that the div is coming from jQuery
 				
 				if (div[0].localName === 'div') {
-					div[0].innerHTML = this.loadingBarHTML;
+					div[0].innerHTML = loadingBarHTML;
 					this.parentDiv = div[0];
 				}
 
 			} else if (div.localName === 'div') { // This means that the div is coming from document.getElementById
-				div.innerHTML = this.loadingBarHTML;
+				div.innerHTML = loadingBarHTML;
 				this.parentDiv = div;
-			}   
-			else
+			} else
 				throw 'LoadingBar failed to load! Invalid div element.';
 		} else
 			throw 'LoadingBar failed to load! Invalid div element.';
 		this.widget = document.getElementsByClassName('loading-bar')[0];
 		this.loadingBars = this.widget.getElementsByClassName('bar');
-		this.widget.style.visibility = 'hidden';
+		this.hide(); // Hide the widget until it's fully loaded
 	};
 
 
@@ -97,38 +96,46 @@
 			this.loadingBars[i].style.width = this.widget.barWidth;
 	};
 
+	// Sets the colors of all the bars to black
+	LoadingBar.prototype.resetBars = function() {
+		var emptyColor = this.widget.barEmptyColor;
+		for (let i = 0; i < this.maxBars; i++) {
+			this.loadingBars[i].style.backgroundColor = emptyColor;
+		}
+	};
+
 	// Shows or hides the widget
 	LoadingBar.prototype.show = function() {
 		this.widget.style.visibility = 'visible';
 	};
 	LoadingBar.prototype.hide = function() {
-		this.stopAnimation();
+		if (this.animationInterval !== undefined)
+			this.stopAnimation();
 		this.widget.style.visibility = 'hidden';
 	};
 
 	// Just a plain animation
 	LoadingBar.prototype.animate = function(speed) {
 		this.stopAnimation();
-		var barsLoaded = this.barsLoaded;
-		var maxBars = this.maxBars;
 		var self = this;
 		var displayPercentage = (this.percentageDisplay !== undefined);
-		var barFilledColor = this.widget.barFilledColor;
 		var animationInterval = setInterval(function() {
-			if (self.barsLoaded >= maxBars) {
+			if (self.barsLoaded >= self.maxBars) {
 				self.barsLoaded = 0;
 				self.resetBars();
-				this.percentage = 0;
+				self.percentage = 0;
 				if (displayPercentage)
 					self.updatePercentage(self.barsLoaded);
 				return;
 			}
-			self.loadingBars[self.barsLoaded].style.backgroundColor = barFilledColor;
+			self.loadingBars[self.barsLoaded].style.backgroundColor = self.widget.barFilledColor;
 
 			self.barsLoaded++;
 
 			if (displayPercentage)
 				self.updatePercentage(self.barsLoaded);
+			else
+				self.percentage = ~~((self.barsLoaded / self.maxBars) * 100);
 
 		}, speed || 100);
 		this.animationInterval = animationInterval;
@@ -259,14 +266,6 @@
 		if (this.percentageDisplay !== undefined)
 			this.updatePercentage(0);
 		this.resetBars();
-	};
-
-	// Sets the colors of all the bars to black
-	LoadingBar.prototype.resetBars = function() {
-		var emptyColor = this.widget.barEmptyColor;
-		for (let i = 0; i < this.maxBars; i++) {
-			this.loadingBars[i].style.backgroundColor = emptyColor;
-		}
 	};
 
 	// Make the constructor publicly available

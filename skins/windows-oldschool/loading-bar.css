@@ -1,11 +1,10 @@
-/* ------------ Loading bar default style -------------  */
+/* ------------ Loading bar - windows oldschool skin -------------  */
 body {
 	background: #d6d3ce;
 }
 .loading-bar {
 	display: inline-block;
 	height: 14px;
-	margin: 5px 0;
 	border-top: 1px solid #888;
 	border-left: 1px solid #888;
 	border-bottom: 1px solid #eee;
@@ -16,18 +15,13 @@ body {
 	display: inline-block;
 	height: 10px;
 	width: 6px;
-	margin: 0 1px;
-	position: relative;
-	top: -3px;
+	margin: 2px 1px;
 	background-color: #050505;
 }
 
 .loading-bar .percentage-container {
     display: block;
 	margin: 0 auto;
-    width: 30px;
-	height: 10px;
-	margin-top: 10px;
 	-webkit-transform: skewX(0deg);
     -moz-transform: skewX(0deg);
     -ms-transform: skewX(0deg);
@@ -36,11 +30,7 @@ body {
 }
 
 .loading-bar .percentage-container #percentage {
-	position: absolute;
+    display: inline-block;
 	text-align: center;
 	font-weight: bold;
-	width: 3em;
-	left: 1px;
-    display: inline-block;
-    margin: 8px 3px;
 }

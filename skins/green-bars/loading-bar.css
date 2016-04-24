@@ -1,43 +1,37 @@
-/* ------------ Loading bar default style -------------  */
+/* ------------ Loading bar - green skin -------------  */
 
 .loading-bar {
 	display: inline-block;
-	padding: 5px 5px 1px 5px;
-	border-top: 1px solid #ddd;
-	border-left: 1px solid #ddd;
-	border-bottom: 1px solid #aaa;
-	border-right: 1px solid #aaa;
+	border: 1px solid #ddd;
 	margin: 5px 0;
-	line-height: 1.2;
-	border-radius: 8px;
+	padding: 0 2px;
+	border-radius: 4px;
+	height: 24px;
+	
+	-webkit-box-shadow: inset 0px 2px 1px 0px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0px 2px 1px 0px rgba(0,0,0,0.1);
+	box-shadow: inset 0px 2px 2px 0px rgba(0,0,0,0.1);
 }
 
 .loading-bar .bar {
 	display: inline-block;
-	height: 30px;
+	height: 20px;
 	width: 12px;
-	margin: 0 2px;
-	background-color: #050505;
-	
-	background: rgba(255,255,255,0.8);
-	background: -moz-linear-gradient(top, rgba(255,255,255,0.8) 0%, rgba(0,255,17,0) 100%);
-	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0.8)), color-stop(100%, rgba(0,255,17,0)));
-	background: -webkit-linear-gradient(top, rgba(255,255,255,0.8) 0%, rgba(0,255,17,0) 100%);
-	background: -o-linear-gradient(top, rgba(255,255,255,0.8) 0%, rgba(0,255,17,0) 100%);
-	background: -ms-linear-gradient(top, rgba(255,255,255,0.8) 0%, rgba(0,255,17,0) 100%);
-	background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(0,255,17,0) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ff11', GradientType=0 );
-
-	border-bottom: 1px solid #999;
-	border-right: 1px solid #999;
-	
+	margin: 2px 1px;
 	border-radius: 4px;
+	
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0.66) 0%, rgba(255,255,255,0.5) 12%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.5) 88%, rgba(255,255,255,0.66) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0.66) 0%,rgba(255,255,255,0.5) 12%,rgba(255,255,255,0) 50%,rgba(255,255,255,0.5) 88%,rgba(255,255,255,0.66) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(255,255,255,0.66) 0%,rgba(255,255,255,0.5) 12%,rgba(255,255,255,0) 50%,rgba(255,255,255,0.5) 88%,rgba(255,255,255,0.66) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a8ffffff', endColorstr='#a8ffffff',GradientType=0 ); /* IE6-9 */
 }
 
 .loading-bar .percentage-container {
     display: inline-block;
-    width: 50px;
-	height: 30px;
+	font-size: 14px;
+    width: 45px;
+	height: 20px;
+	text-align: center;
 	-webkit-transform: skewX(0deg);
     -moz-transform: skewX(0deg);
     -ms-transform: skewX(0deg);
@@ -47,10 +41,5 @@
 
 .loading-bar .percentage-container #percentage {
 	position: absolute;
-	text-align: center;
-	font-weight: bold;
 	width: 3em;
-	left: 1px;
-    display: inline-block;
-    margin: 8px 3px;
 }

@@ -8,10 +8,10 @@
 	line-height: 1.2;
 	
 	-webkit-transform: skewX(-20deg);
-    -moz-transform: skewX(-20deg);
-    -ms-transform: skewX(-20deg);
-    -o-transform: skewX(-20deg);
-    transform: skewX(-20deg);
+	-moz-transform: skewX(-20deg);
+	-ms-transform: skewX(-20deg);
+	-o-transform: skewX(-20deg);
+	transform: skewX(-20deg);
 }
 
 .loading-bar .bar {
@@ -23,14 +23,14 @@
 }
 
 .loading-bar .percentage-container {
-    display: inline-block;
-    width: 50px;
+	display: inline-block;
+	width: 50px;
 	height: 30px;
 	-webkit-transform: skewX(20deg);
-    -moz-transform: skewX(20deg);
-    -ms-transform: skewX(20deg);
-    -o-transform: skewX(20deg);
-    transform: skewX(20deg);
+	-moz-transform: skewX(20deg);
+	-ms-transform: skewX(20deg);
+	-o-transform: skewX(20deg);
+	transform: skewX(20deg);
 }
 
 .loading-bar .percentage-container #percentage {
@@ -38,6 +38,6 @@
 	text-align: center;
 	width: 3em;
 	left: 1px;
-    display: inline-block;
-    margin: 8px 3px;
+	display: inline-block;
+	margin: 8px 3px;
 }

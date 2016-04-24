@@ -6,7 +6,7 @@
 	function LoadingBar(options) {
 		this.maxBars = options.maxBars || 12;
 		var loadingBarHTML = '<div class="loading-bar">';
-		for (let i = 0; i < this.maxBars; i++)
+		for (var i = 0; i < this.maxBars; i++)
 			loadingBarHTML += '<div class="bar"></div>';
 		if (options.showPercentage === true)
 			loadingBarHTML += '<div class="percentage-container"><div id="percentage">0%</div></div>';
@@ -92,14 +92,14 @@
 	};
 
 	LoadingBar.prototype.setBarWidths = function() {
-		for (let i = 0; i < this.maxBars; i++)
+		for (var i = 0; i < this.maxBars; i++)
 			this.loadingBars[i].style.width = this.widget.barWidth;
 	};
 
 	// Sets the colors of all the bars to black
 	LoadingBar.prototype.resetBars = function() {
 		var emptyColor = this.widget.barEmptyColor;
-		for (let i = 0; i < this.maxBars; i++) {
+		for (var i = 0; i < this.maxBars; i++) {
 			this.loadingBars[i].style.backgroundColor = emptyColor;
 		}
 	};
@@ -231,7 +231,7 @@
 	};
 
 	LoadingBar.prototype.fillBars = function(percent) {
-		for (let i = 0; i < this.barsLoaded; i++) {
+		for (var i = 0; i < this.barsLoaded; i++) {
 			this.loadingBars[i].style.backgroundColor = this.widget.barFilledColor;
 		}
 	};
@@ -259,7 +259,7 @@
 				this.percentage = 100;
 	};
 
-	// Resets the entire loader
+	// Resets the entire loading bar
 	LoadingBar.prototype.reset = function() {
 		this.barsLoaded = 0;
 		this.percentage = 0;

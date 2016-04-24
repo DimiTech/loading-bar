@@ -1,6 +1,6 @@
 A little loading widget I've created in JavaScript as an experiment. 
 There are working examples included so you can figure out how to use the widget real fast.
-Also check out the Wiki tab of this repository, there's some documentation there.
+Also, there's some documentation [here](https://github.com/Dusan-Dimitric/loading-bar/wiki/Instructions "docs").
 
 Enjoy!
 

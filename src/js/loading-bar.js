@@ -142,6 +142,8 @@
 	// Advance the loading by a given percentage
 	LoadingBar.prototype.advanceByPercentage = function(percent) {
 		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
+ 			
+ 			percent = percent.toFixed(2);
 
 			// Update the percentage display and property
 			if (this.percentageDisplay !== undefined)
@@ -197,6 +199,7 @@
 	LoadingBar.prototype.setValue = function(percent) {
 		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
 			this.barsLoaded = ~~(this.maxBars * percent); // Using the bitwise NOT operator to convert to int
+			percent = percent.toFixed(2);
 
 			if (this.barsLoaded >= this.maxBars)
 				this.barsLoaded = this.maxBars;
@@ -209,13 +212,13 @@
 			// Fill affected bars
 			this.fillBars();
 
+			this.percentage = 0;
+			this.addPercentage(percent);
+
 			// Update the percentage display
 			if (this.percentageDisplay !== undefined)
-				this.updatePercentage(this.barsLoaded);
-			else {
-				this.percentage = 0;
-				this.addPercentage(percent);
-			}
+				this.updatePercentage(this.barsLoaded, 0);
+			
 		}
 		return this;
 	};
@@ -228,7 +231,6 @@
 	
 	// Update the percentage text
 	LoadingBar.prototype.updatePercentage = function(barsLoaded, percent) {
-		console.log();
 		if (barsLoaded > this.maxBars)
 			this.percentage = 0;
 		else {
@@ -236,8 +238,7 @@
 				this.percentage = ~~((barsLoaded / this.maxBars) * 100); // Using the bitwise NOT operator to convert to int
 			else {
 				this.addPercentage(percent);
-			}
-										 
+			}					 
 		}
 		
 		this.percentageDisplay.innerHTML = this.percentage + '%';

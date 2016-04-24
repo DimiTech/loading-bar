@@ -260,7 +260,7 @@
 	};
 
 	// Resets the entire loader
-	LoadingBar.prototype.resetLoader = function() {
+	LoadingBar.prototype.reset = function() {
 		this.barsLoaded = 0;
 		this.percentage = 0;
 		if (this.percentageDisplay !== undefined)

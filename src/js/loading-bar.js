@@ -178,6 +178,7 @@
 
 	// Advance the loading by a given number of bars
 	LoadingBar.prototype.advanceBy = function(noBars) {
+		noBars = ~~noBars; // cast to int
 		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
 			this.barsLoaded += noBars;
 

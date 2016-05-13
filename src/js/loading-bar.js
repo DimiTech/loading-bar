@@ -59,22 +59,26 @@
 	LoadingBar.prototype.initializeStyle = function(style) {
 		if (style !== undefined) { // if the user provided custom style
 
-			// set the container color
-			this.widget.containerColor = style.containerColor || '#111111';
-			// set the bar color
+			// set the bar colors
 			this.widget.barFilledColor = style.barFilledColor || '#FE8301';
 			this.widget.barEmptyColor  = style.barEmptyColor  || '#050505';
+			console.log(this);
+
+			// set the container color
+			if (style.containerColor !== undefined)
+				this.widget.containerColor = style.containerColor;
+
 			// set the percentage text color
-			this.widget.percentageColor = style.percentageColor || '#FFFFFF';
+			if (style.percentageColor !== undefined)
+				this.widget.percentageColor = style.percentageColor;
+
 			// width of one bar
 			this.widget.barWidth = style.barWidth;
+
 		} else { // the user didn't provide his own style
-			// default all colors
+			// default filled and empty colors
 			this.widget.barFilledColor  = '#FE8301';
 			this.widget.barEmptyColor   = '#050505';
-			this.widget.containerColor  = '#111111';
-			this.widget.percentageColor = '#FFFFFF';
-
 		}
 
 		this.applyStyles();
@@ -83,11 +87,15 @@
 
 	// Applies all the styles
 	LoadingBar.prototype.applyStyles = function() {
-		this.widget.style.backgroundColor = this.widget.containerColor;
-		if (this.percentageDisplay !== undefined)
+		if (this.widget.containerColor !== undefined)
+			this.widget.style.backgroundColor = this.widget.containerColor;
+
+		if (this.percentageDisplay !== undefined && this.widget.percentageColor !== undefined)
 			this.percentageDisplay.style.color = this.widget.percentageColor;
+
 		if (this.widget.barWidth !== undefined)
 			this.setBarWidths();
+
 		this.resetBars();
 	};
 

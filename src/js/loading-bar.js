@@ -62,7 +62,6 @@
 			// set the bar colors
 			this.widget.barFilledColor = style.barFilledColor || '#FE8301';
 			this.widget.barEmptyColor  = style.barEmptyColor  || '#050505';
-			console.log(this);
 
 			// set the container color
 			if (style.containerColor !== undefined)

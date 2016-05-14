@@ -33,7 +33,7 @@
 	transform: skewX(20deg);
 }
 
-.loading-bar .percentage-container #percentage {
+.loading-bar .percentage-container .percentage {
 	position: absolute;
 	text-align: center;
 	width: 3em;

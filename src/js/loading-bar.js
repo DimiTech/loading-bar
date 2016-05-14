@@ -9,7 +9,7 @@
 		for (var i = 0; i < this.maxBars; i++)
 			loadingBarHTML += '<div class="bar"></div>';
 		if (options.showPercentage === true)
-			loadingBarHTML += '<div class="percentage-container"><div id="percentage">0%</div></div>';
+			loadingBarHTML += '<div class="percentage-container"><div class="percentage">0%</div></div>';
 		this.percentage = 0;
 		loadingBarHTML += '</div>';
 
@@ -18,7 +18,7 @@
 		this.barsLoaded = 0;
 		this.loadIntoDiv(options.div, loadingBarHTML);
 		if (options.showPercentage === true) {
-			this.percentageDisplay = document.getElementById('percentage');
+			this.percentageDisplay = this.parentDiv.getElementsByClassName('percentage')[0];
 			this.centerPercentageLabel();
 		}
 		this.initializeStyle(options.style);
@@ -51,7 +51,7 @@
 
 	// Centers the percentage label
 	LoadingBar.prototype.centerPercentageLabel = function() {
-		var topMargin = (this.parentDiv.clientHeight - this.percentageDisplay.clientHeight) / 2  - 10;
+		var topMargin = (this.parentDiv.clientHeight - this.percentageDisplay.clientHeight) / 2  - 9;
 		this.percentageDisplay.style.marginTop = topMargin + 'px';
 	};
 

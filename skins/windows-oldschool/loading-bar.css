@@ -29,7 +29,7 @@ body {
     transform: skewX(0deg);
 }
 
-.loading-bar .percentage-container #percentage {
+.loading-bar .percentage-container .percentage {
     display: inline-block;
 	text-align: center;
 	font-weight: bold;

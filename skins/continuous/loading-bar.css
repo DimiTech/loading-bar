@@ -20,7 +20,7 @@
 	display: block;
 }
 
-.loading-bar .percentage-container #percentage {
+.loading-bar .percentage-container .percentage {
 	display: block;
 	font-weight: bold;
 	text-align: center;

@@ -47,8 +47,18 @@
 	<a class="button" onclick="stop(2)">Stop</a>
 
 	<script type="text/javascript">
+	
+	
+		// Create a loading bar - the long way
+		var widgetDiv = document.getElementById('loading-bar1');
+		var options = {
+			div: widgetDiv,
+			maxBars: 12
+		};
+		var loadingBar1 = new LoadingBar(options);
+		loadingBar1.animate(); // the default is 100 ms
 		
-		// Create a loading bar - the short way
+		// Create a loading bar - the short way (with more options though)
 		var loadingBar2 = new LoadingBar({
 			div: $('#loading-bar2'),
 			maxBars: 15,
@@ -61,14 +71,6 @@
 			showPercentage: true
 		}).animate(500);// the default is 100 ms
 		
-		// Create a loading bar - the long way
-		var widgetDiv = document.getElementById('loading-bar1');
-		var options = {
-			div: widgetDiv,
-			maxBars: 12
-		};
-		var loadingBar1 = new LoadingBar(options);
-		loadingBar1.animate(); // the default is 100 ms
 
 		// These two functions are triggered by buttons
 		function stop(bar) {

@@ -43,11 +43,21 @@
 				throw 'LoadingBar failed to load! Invalid div element.';
 		} else
 			throw 'LoadingBar failed to load! Invalid div element.';
-		this.widget = document.getElementsByClassName('loading-bar')[0];
+
+		this.widget = this.parentDiv.children[0];
 		this.loadingBars = this.widget.getElementsByClassName('bar');
 		this.hide(); // Hide the widget until it's fully loaded
 	};
 
+	// Shows or hides the widget
+	LoadingBar.prototype.show = function() {
+		this.widget.style.visibility = 'visible';
+	};
+	LoadingBar.prototype.hide = function() {
+		if (this.animationInterval !== undefined)
+			this.stopAnimation();
+		this.widget.style.visibility = 'hidden';
+	};
 
 	// Centers the percentage label
 	LoadingBar.prototype.centerPercentageLabel = function() {
@@ -103,22 +113,12 @@
 			this.loadingBars[i].style.width = this.widget.barWidth;
 	};
 
-	// Sets the colors of all the bars to black
+	// Sets the colors of all the bars to their 'empty' color
 	LoadingBar.prototype.resetBars = function() {
 		var emptyColor = this.widget.barEmptyColor;
 		for (var i = 0; i < this.maxBars; i++) {
 			this.loadingBars[i].style.backgroundColor = emptyColor;
 		}
-	};
-
-	// Shows or hides the widget
-	LoadingBar.prototype.show = function() {
-		this.widget.style.visibility = 'visible';
-	};
-	LoadingBar.prototype.hide = function() {
-		if (this.animationInterval !== undefined)
-			this.stopAnimation();
-		this.widget.style.visibility = 'hidden';
 	};
 
 	// Just a plain animation
@@ -183,7 +183,7 @@
 		return this;
 	};
 
-	// Advance the loading by a given number of bars
+	// Advance the loading by a given number of bars - 'noBars'
 	LoadingBar.prototype.advanceBy = function(noBars) {
 		noBars = ~~noBars; // cast to int
 		if (this.barsLoaded <= this.maxBars && this.barsLoaded >= 0) {
